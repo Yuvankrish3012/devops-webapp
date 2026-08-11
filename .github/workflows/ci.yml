@@ -1,0 +1,21 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Build Placeholder
+        run: echo "Building the project..."
+
+      - name: Generate Output Logs
+        run: echo "Code checkout and build simulated successfully!"
