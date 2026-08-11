@@ -22,10 +22,12 @@ jobs:
 
       - name: Send Slack Success Notification
         if: success()
-        run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"✅ GitHub Actions: CI Pipeline Build SUCCESS for devops-webapp"}' "${{ secrets.SLACK_WEBHOOK_URL }}"
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: curl -X POST -H 'Content-type: application/json' --data '{"text":"✅ GitHub Actions: CI Pipeline Build SUCCESS for devops-webapp"}' $SLACK_WEBHOOK
 
       - name: Send Slack Failure Notification
         if: failure()
-        run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"text":"❌ GitHub Actions: CI Pipeline Build FAILED for devops-webapp"}' "${{ secrets.SLACK_WEBHOOK_URL }}"
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: curl -X POST -H 'Content-type: application/json' --data '{"text":"❌ GitHub Actions: CI Pipeline Build FAILED for devops-webapp"}' $SLACK_WEBHOOK
